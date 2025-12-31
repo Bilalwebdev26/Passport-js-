@@ -1,34 +1,16 @@
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
+import {useUser} from "../hooks/useUser.js"
+import { useNavigate } from 'react-router-dom';
 
 const AuthSuccess = () => {
-  useEffect(() => {
-    const handleAuth = async () => {
-      const params = new URLSearchParams(window.location.search);
-      console.log("Params : ", params);
-      const accessToken = params.get("token");
-      console.log("accessToken : ", accessToken);
-      if (accessToken) {
-        localStorage.setItem("accessToken", accessToken);
-        try {
-          const res = await axios.get("http://localhost:3000/auth/me", {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          });
-          // if(res.data.success){
-
-          // }
-          console.log(res);
-          
-        } catch (error) {
-          console.log("Error in authsuccess : ", error);
-        }
-      }
-    };
-    handleAuth()
-  }, []);
+  const { user, loading, error } = useUser();
+  const navigate = useNavigate()
+ console.log("User : ",user)
+ console.log("loading : ",loading)
+ console.log("error : ",error?error:"")
+ navigate("/")
   return <div>AuthSuccess</div>;
 };
 

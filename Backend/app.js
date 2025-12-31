@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser"
 import passportRoutes from "./routes/passport.routes.js";
 import { connectDB } from "./DB/db.config.js";
 import "./config/passport.js"
@@ -14,6 +15,7 @@ app.use(
 );
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cookieParser())
 app.use("/auth", passportRoutes);
 connectDB()
   .then(() => {
