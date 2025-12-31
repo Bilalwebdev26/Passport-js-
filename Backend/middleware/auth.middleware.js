@@ -3,20 +3,20 @@ import User from "../model/user.model.js";
 
 export const isAuthenticated = async (req, res, next) => {
   try {
-    console.log("Req.header : ",req.headers)
-    const authHeader = req.headers.authorization;
+    console.log("Req.header : ",req.cookies?.token|| req.header("Authorization")?.replace("Bearer ", "").trim())
+    const authHeader = req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "").trim();
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader) {
       return res.status(401).json({
         success: false,
         message: "Access token is missing or invalid",
       });
     }
 
-    const token = authHeader.split(" ")[1];
-    console.log(token);
+    //const token = authHeader.split(" ")[1];
+    console.log(authHeader);
     
-    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    jwt.verify(authHeader, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
         if (err.name === "TokenExpiredError") {
           return res.status(400).json({

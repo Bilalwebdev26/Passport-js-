@@ -22,9 +22,18 @@ router.get(
         process.env.JWT_SECRET,
         { expiresIn: "7d" }
       );
+<<<<<<< HEAD
       res.cookie("accessToken", token, {
         maxAge: 2000,
       });
+=======
+      res.cookie("token",token,{
+        httpOnly: true,   // JS se access nahi hogi
+        secure: true,    // HTTPS par hi chalegi
+        sameSite: 'strict',
+        maxAge: 1000 * 60 * 60 // 1 hour
+      })
+>>>>>>> feature1
       res.redirect(`${process.env.CLIENT_URL}/auth-success?token=${token}`);
     } catch (error) {
       console.log("Google Login error : ", error);
