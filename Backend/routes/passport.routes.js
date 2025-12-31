@@ -36,7 +36,7 @@ router.get(
   }
 );
 router.get("/me", isAuthenticated, (req, res) => {
-  console.log("Req.user : ",req.user)
+  console.log("Req.user : ", req.user);
   res.json({ success: true, user: req.user });
 });
 export default router;

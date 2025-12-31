@@ -4,7 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser"
 import passportRoutes from "./routes/passport.routes.js";
 import { connectDB } from "./DB/db.config.js";
-import "./config/passport.js"
+import cookieParser from "cookie-parser";
+import "./config/passport.js";
 const app = express();
 dotenv.config();
 app.use(
@@ -15,7 +16,7 @@ app.use(
 );
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 app.use("/auth", passportRoutes);
 connectDB()
   .then(() => {

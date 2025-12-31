@@ -17,7 +17,7 @@ passport.use(
       // console.log("refreshToken",refreshToken);
 
       try {
-        let user = await User.findOneAndUpdate({ googleId: profile.id });
+        let user = await User.findOne({ googleId: profile.id });
         if (!user) {
           user = await User.create({
             googleId: profile.id,
