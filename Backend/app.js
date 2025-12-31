@@ -16,11 +16,7 @@ app.use(
 );
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-<<<<<<< HEAD
 app.use(cookieParser());
-=======
-app.use(cookieParser())
->>>>>>> feature1
 app.use("/auth", passportRoutes);
 connectDB()
   .then(() => {
